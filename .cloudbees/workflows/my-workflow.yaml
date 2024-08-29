@@ -9,11 +9,15 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      env1:
+        type: string
 jobs:
   build:
+    environment: ${{ inputs.env1 }}
     steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
+      - uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
         shell: sh
         run: |
           sleep 60s
